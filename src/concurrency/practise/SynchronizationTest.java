@@ -3,6 +3,7 @@ package concurrency.practise;
 import java.util.Calendar;
 
 public class SynchronizationTest {
+	
 	public static void main(String[] args) {
 		SharedObj sharedObj = new SharedObj(0,0);
 		Thread t1 = new Thread(new Runnable1(sharedObj));
