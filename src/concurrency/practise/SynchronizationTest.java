@@ -25,6 +25,7 @@ public class SynchronizationTest {
 			return b;
 		}
 		
+		// sychronized methods locks the object instead of the code block
 		public synchronized int increseA() {
 			long sTime = Calendar.getInstance().getTimeInMillis();
 			try {
@@ -52,6 +53,9 @@ public class SynchronizationTest {
 			return (++b);
 		}
 		
+
+		// when two threads access a static method and a non-static method (both synchronized) at the same time
+		// they will not interfere with each other
 		public static synchronized void staticMethod() {
 			long sTime = Calendar.getInstance().getTimeInMillis();
 			try {
