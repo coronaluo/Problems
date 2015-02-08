@@ -5,10 +5,10 @@ import java.util.Calendar;
 public class SynchronizationTest {
 	public static void main(String[] args) {
 		SharedObj sharedObj = new SharedObj(0,0);
-		Thread1 t1 = new Thread1(sharedObj);
-		Thread2 t2 = new Thread2(sharedObj);
-		t1.run();
-		t2.run();
+		Thread t1 = new Thread(new Runnable1(sharedObj));
+		Thread t2 = new Thread(new Runnable2(sharedObj));
+		t1.start();
+		t2.start();
 	}
 	
 	static class SharedObj {
@@ -51,33 +51,59 @@ public class SynchronizationTest {
 			}
 			return (++b);
 		}
+		
+		public static synchronized void staticMethod() {
+			long sTime = Calendar.getInstance().getTimeInMillis();
+			try {
+				while (Calendar.getInstance().getTimeInMillis() - sTime < 2000) {
+					Thread.sleep(100);
+					System.out.println("cur thread="+Thread.currentThread().getId() + " is accessing staticMethod()");
+				}
+			} catch (InterruptedException e) {
+				System.out.println("THREAD "+Thread.currentThread().getId() + "is interrupted");
+			}
+		}
+		
+		public synchronized void nonStaticMethod() {
+			long sTime = Calendar.getInstance().getTimeInMillis();
+			try {
+				while (Calendar.getInstance().getTimeInMillis() - sTime < 2000) {
+					Thread.sleep(100);
+					System.out.println("cur thread="+Thread.currentThread().getId()+"/accessing nonStaticMethod()");
+				}
+			} catch (InterruptedException e) {
+				System.out.println("THREAD #= "+Thread.activeCount() + "is interrupted");
+			}
+		}
 	}
 	
-	static class Thread1 implements Runnable {
+	static class Runnable1 implements Runnable {
 		SharedObj obj;
 		
-		public Thread1(SharedObj o) {
+		public Runnable1(SharedObj o) {
 			obj = o;
 		}
 		
 		@Override
 		public void run() {
-			obj.increseA();
-			System.out.println("a="+obj.getA() + "/ b="+obj.getB());
+//			 obj.increseA();
+//			 System.out.println("a="+obj.getA() + "/ b="+obj.getB());
+			obj.nonStaticMethod();
 		}
 	}
 	
-	static class Thread2 implements Runnable {
+	static class Runnable2 implements Runnable {
 		SharedObj obj;
 		
-		public Thread2(SharedObj o) {
+		public Runnable2(SharedObj o) {
 			obj = o;
 		}
 		
 		@Override
 		public void run() {
-			obj.increseB();
-			System.out.println("a="+obj.getA() + "/ b="+obj.getB());
+//			obj.increseB();
+//			System.out.println("a="+obj.getA() + "/ b="+obj.getB());
+			obj.staticMethod();
 		}
 	}
 	
