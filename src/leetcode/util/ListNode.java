@@ -8,4 +8,13 @@ public class ListNode {
 		val = x;
 		next = null;
 	}
+	
+	public static void displayList(ListNode head) {
+		System.out.println("displaying list...");
+		ListNode p = head;
+		while (p != null) {
+			System.out.println(p.val);
+			p = p.next;
+		}
+	}
 }

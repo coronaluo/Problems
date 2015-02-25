@@ -24,6 +24,40 @@ public class Solution {
 	     TreeNode(int x) { val = x; }
 	 }
 	
+	 private static boolean isAnagrams(List<String> words) {
+	    	if (words == null || words.size() == 0) throw new RuntimeException("empty input");
+	    	if (words.size() == 1) throw new RuntimeException("at least 2 words should be presented");
+	    	
+	    	HashMap<Character, Integer> hm = new HashMap<Character, Integer>();
+	    	String first = words.get(0);
+	    	for (int i = 0; i < first.length(); i++) {
+	    		char c = first.charAt(i);
+	    		if (!hm.containsKey(c)) hm.put(c, 0);
+	    		int freq = hm.get(c);
+	    		hm.put(c, freq+1);
+	    	}
+	    	int len = first.length();
+	    	for (String word : words) {
+	    		if (word.length() != len) return false;
+	    		HashMap<Character, Integer> hmt = new HashMap<Character, Integer>(hm);
+	    		for (int i = 0; i < word.length(); i++) {
+	    			char c = word.charAt(i);
+	    			if (!hmt.containsKey(c)) return false;
+	    			int freq = hmt.get(c);
+	    			if (freq == 1) hmt.remove(c);
+	    			else hmt.put(c, freq-1);
+	    		}
+	    	}
+	    	return true;
+	    }
+	    
+//	    public static void main(String []args) {
+//	    	
+//	    	/* Enter your code here. Read input from STDIN. Print output to STDOUT */
+//	    	Scanner sc = new Scanner(System.in);
+//	        List<String> list = new ArrayList<String>();
+//	        System.out.println(isAnagrams(list));
+//	    }
 	 public static void main(String[] args) {
 	        /* Enter your code here. Read input from STDIN. Print output to STDOUT. Your class should be named Solution. */
 //	        
