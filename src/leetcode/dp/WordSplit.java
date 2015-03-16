@@ -12,8 +12,8 @@ public class WordSplit {
 		System.out.println(new WordSplit().isWordSplitable("suckshashtag",dict));
 	}
 
-//  输入：word字典，一个
-//	string。输出：string是否可以由字典里面的word拼接而成
+//  输入：word字典，一个 string。
+//	输出：string是否可以由字典里面的word拼接而成
 	public boolean isWordSplitable(String word, List<String> dict) {
 		// f(i): whether word.substr(0, i+1)  is splitable
 		// f(i) = f(k) where k <= i && dict.contains(word.substring(k, i))

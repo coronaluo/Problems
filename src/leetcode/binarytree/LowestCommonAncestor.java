@@ -2,8 +2,8 @@ package leetcode.binarytree;
 
 import java.util.HashMap;
 
-import leetcode.BST.ColumnWisePrintOut;
-import leetcode.BST.TreeNode;
+import leetcode.binarySearch.ColumnWisePrintOut;
+import leetcode.binarySearch.TreeNode;
 
 public class LowestCommonAncestor {
 	public static void main(String[] args) {

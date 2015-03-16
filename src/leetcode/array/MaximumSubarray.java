@@ -21,7 +21,7 @@ public class MaximumSubarray {
             max = Math.max(max, sum);
             lastsum = sum;
         }
-        
+    
         return max;
     }
 	

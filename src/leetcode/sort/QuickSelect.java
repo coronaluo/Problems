@@ -2,8 +2,8 @@ package leetcode.sort;
 
 public class QuickSelect {
 	public static void main(String[] args) {
-		 System.out.println(new QuickSelect().quickSelect(new int[]{4,2,5,7,6,3,3,1}, 6));
-//		System.out.println(new QuickSelect().quickSelect(new int[]{1,2,4,3}, 3));
+		 // System.out.println(new QuickSelect().quickSelect(new int[]{4,2,5,7,6,3,3,1}, 6));
+		System.out.println(new QuickSelect().quickSelect(new int[]{1,2,4,3,5,7,6,8}, 4));
 		 System.out.println(Long.MAX_VALUE);
 		 System.out.print(Integer.MAX_VALUE+""+Integer.MAX_VALUE);
 	}
@@ -37,6 +37,6 @@ public class QuickSelect {
 			}
 		}
 	
-		return right+1;
+		return left;
 	}
 }
